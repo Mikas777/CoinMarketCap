@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using CoinMarketCap.Application.ViewModels;
 
 namespace CoinMarketCap.Application
 {
@@ -9,6 +10,7 @@ namespace CoinMarketCap.Application
     {
         public MainWindow()
         {
+            DataContext = new MainWindowViewModel(new DashboardPageViewModel());
             InitializeComponent();
         }
     }

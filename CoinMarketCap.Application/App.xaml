@@ -1,9 +1,14 @@
-﻿<Application x:Class="CoinMarketCap.Application.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:CoinMarketCap.Application"
-             StartupUri="MainWindow.xaml">
+﻿<Application
+    x:Class="CoinMarketCap.Application.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:CoinMarketCap.Application"
+    xmlns:viewModels="clr-namespace:CoinMarketCap.Application.ViewModels"
+    xmlns:views="clr-namespace:CoinMarketCap.Application.Views"
+    StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <DataTemplate DataType="{x:Type viewModels:DashboardPageViewModel}">
+            <views:MainView />
+        </DataTemplate>
     </Application.Resources>
 </Application>

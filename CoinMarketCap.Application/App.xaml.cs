@@ -1,14 +1,27 @@
-﻿using System.Configuration;
-using System.Data;
+﻿using Microsoft.Extensions.Hosting;
 using System.Windows;
+using Microsoft.Extensions.DependencyInjection;
+using CoinMarketCap.Application.Extensions;
 
-namespace CoinMarketCap.Application
+namespace CoinMarketCap.Application;
+
+public partial class App
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    public partial class App : Application
+    private readonly IHost _host = ServicesConfigurator.CreateHost();
+
+    protected override async void OnStartup(StartupEventArgs e)
     {
+        await _host.StartAsync().ConfigureAwait(false);
+
+        var serviceProvider = _host.Services.CreateScope().ServiceProvider;
+
+        base.OnStartup(e);
     }
 
+    protected override async void OnExit(ExitEventArgs e)
+    {
+        await _host.StopAsync().ConfigureAwait(false);
+        _host.Dispose();
+        base.OnExit(e);
+    }
 }
