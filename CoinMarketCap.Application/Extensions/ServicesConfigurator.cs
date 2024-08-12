@@ -3,11 +3,14 @@ using CoinMarketCap.Application.Clients;
 using CoinMarketCap.Application.Clients.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using CoinMarketCap.Application.Services;
+using CoinMarketCap.Application.Services.Singleton;
+using CoinMarketCap.Application.Services.Singleton.Interfaces;
 using CoinMarketCap.Application.Services.Transient;
 using CoinMarketCap.Application.Services.Transient.Interfaces;
 using Serilog;
 using Serilog.Events;
+using CoinMarketCap.Application.ViewModels;
+using CoinMarketCap.Application.Models;
 
 namespace CoinMarketCap.Application.Extensions;
 
@@ -19,6 +22,7 @@ public class ServicesConfigurator
             .MinimumLevel.Information()
             .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
             .MinimumLevel.Override("System.Net.Http.HttpClient", LogEventLevel.Warning)
+            .WriteTo.Debug()
             .WriteTo.File($@"{Directory.GetCurrentDirectory()}\Logs\logs_.txt", rollingInterval: RollingInterval.Day, retainedFileCountLimit: 14).CreateLogger();
 
         return new HostBuilder()
@@ -29,7 +33,16 @@ public class ServicesConfigurator
                     client.BaseAddress = new Uri("https://api.coincap.io/v2/");
                 });
 
-                services.AddTransient<ICryptoService, CryptoService>();
+                services.AddTransient<IStartupService, StartupService>();
+                services.AddTransient<ICurrencyFetcherService, CurrencyFetcherService>();
+                services.AddSingleton<INavigationService, NavigationService>();
+                services.AddSingleton<MainWindowViewModel>();
+                services.AddSingleton<DashboardPageViewModel>();
+                services.AddSingleton<RuntimeDataStorage>();
+
+                services.AddSingleton<CryptoUpdaterHostedService>();
+                services.AddHostedService(static serviceProvider => serviceProvider.GetRequiredService<CryptoUpdaterHostedService>());
+
             }).UseSerilog().Build();
     }
 }

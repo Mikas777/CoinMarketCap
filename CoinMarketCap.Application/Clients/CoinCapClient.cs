@@ -8,7 +8,7 @@ namespace CoinMarketCap.Application.Clients;
 
 public class CoinCapClient(HttpClient httpClient, ILogger<CoinCapClient> logger) : ICoinCapClient
 {
-    public async Task<List<CryptocurrencyDTO>?> GetAssets()
+    public async Task<List<CryptocurrencyDTO>?> GetCryptocurrencies()
     {
         const string url = "assets";
 
@@ -27,9 +27,9 @@ public class CoinCapClient(HttpClient httpClient, ILogger<CoinCapClient> logger)
 
             try
             {
-                var data = JsonConvert.DeserializeObject<List<CryptocurrencyDTO>>(content);
-               
-                return data;
+                var data = JsonConvert.DeserializeObject<CryptocurrencyResponseDTO>(content);
+
+                return data?.Data;
             }
             catch (Exception e)
             {

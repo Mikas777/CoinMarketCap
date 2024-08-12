@@ -2,6 +2,8 @@
 using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using CoinMarketCap.Application.Extensions;
+using CoinMarketCap.Application.Services.Transient.Interfaces;
+using CoinMarketCap.Application.ViewModels;
 
 namespace CoinMarketCap.Application;
 
@@ -11,11 +13,21 @@ public partial class App
 
     protected override async void OnStartup(StartupEventArgs e)
     {
+        base.OnStartup(e);
+
         await _host.StartAsync().ConfigureAwait(false);
 
         var serviceProvider = _host.Services.CreateScope().ServiceProvider;
+        var mainWindowViewModel = serviceProvider.GetRequiredService<MainWindowViewModel>();
 
-        base.OnStartup(e);
+        var mainWindow = new MainWindow
+        {
+            DataContext = mainWindowViewModel
+        };
+
+        mainWindow.Show();
+
+        await _host.Services.GetRequiredService<IStartupService>().Start().ConfigureAwait(false);
     }
 
     protected override async void OnExit(ExitEventArgs e)

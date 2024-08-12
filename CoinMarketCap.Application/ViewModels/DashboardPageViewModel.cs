@@ -1,16 +1,10 @@
-﻿using CoinMarketCap.Application.Services;
-using CommunityToolkit.Mvvm.ComponentModel;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using CoinMarketCap.Application.Models;
+using CoinMarketCap.Application.Common;
 
 namespace CoinMarketCap.Application.ViewModels;
 
-public partial class DashboardPageViewModel : ObservableObject
+public class DashboardPageViewModel(RuntimeDataStorage runtimeDataStorage) : PageViewModelBase
 {
-    private ObservableCollection<Cryptocurrency> _cryptocurrencies;
-
-    private void UpdateCryptocurrencies()
-    {
-
-    }
+    public ObservableCollection<Cryptocurrency> Cryptocurrencies { get; } = runtimeDataStorage.Cryptocurrencies;
 }

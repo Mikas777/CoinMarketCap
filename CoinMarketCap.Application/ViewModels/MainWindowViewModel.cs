@@ -1,15 +1,21 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CoinMarketCap.Application.Common;
+using CoinMarketCap.Application.Services.Singleton.Interfaces;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace CoinMarketCap.Application.ViewModels;
 
-[ObservableObject]
-public partial class MainWindowViewModel
+public partial class MainWindowViewModel : ObservableObject
 {
     [ObservableProperty]
-    private ObservableObject _content;
+    private PageViewModelBase? _content;
 
-    public MainWindowViewModel(DashboardPageViewModel dashboardPageViewModel)
+    public MainWindowViewModel(INavigationService navigationService)
     {
-        Content = dashboardPageViewModel;
+        navigationService.PageChanged += OnPageChanged;
+    }
+
+    private void OnPageChanged(object? sender, PageChangedEventArgs e)
+    {
+        Content = e.CurrentPage;
     }
 }
