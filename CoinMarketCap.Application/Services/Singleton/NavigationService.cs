@@ -12,16 +12,7 @@ public class NavigationService(IServiceProvider serviceProvider) : INavigationSe
 
     public event EventHandler<PageChangedEventArgs>? PageChanged;
 
-    public void NavigateToDashboardPage()
-    {
-        var runtimeDataStorage = serviceProvider.GetRequiredService<RuntimeDataStorage>();
-
-        var dashboardPageViewModel = new DashboardPageViewModel(runtimeDataStorage);
-
-        SetContent(dashboardPageViewModel);
-    }
-
-    private void SetContent(PageViewModelBase newPage)
+    public void NavigateTo(PageViewModelBase newPage)
     {
         if (CurrentPage == newPage)
         {
@@ -30,5 +21,12 @@ public class NavigationService(IServiceProvider serviceProvider) : INavigationSe
 
         CurrentPage = newPage;
         PageChanged?.Invoke(this, new PageChangedEventArgs { CurrentPage = CurrentPage });
+    }
+
+    public void NavigateToDashboardPage()
+    {
+        var dashboardPageViewModel = serviceProvider.GetRequiredService<DashboardPageViewModel>();
+
+        NavigateTo(dashboardPageViewModel);
     }
 }

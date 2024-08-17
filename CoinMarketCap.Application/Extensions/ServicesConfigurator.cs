@@ -11,6 +11,8 @@ using Serilog;
 using Serilog.Events;
 using CoinMarketCap.Application.ViewModels;
 using CoinMarketCap.Application.Models;
+using CoinMarketCap.Application.Themes;
+using CoinMarketCap.Application.Common.Enums;
 
 namespace CoinMarketCap.Application.Extensions;
 
@@ -39,6 +41,7 @@ public class ServicesConfigurator
                 services.AddSingleton<MainWindowViewModel>();
                 services.AddSingleton<DashboardPageViewModel>();
                 services.AddSingleton<RuntimeDataStorage>();
+                services.AddSingleton<ThemeManager<ApplicationTheme>>();
 
                 services.AddSingleton<CryptoUpdaterHostedService>();
                 services.AddHostedService(static serviceProvider => serviceProvider.GetRequiredService<CryptoUpdaterHostedService>());

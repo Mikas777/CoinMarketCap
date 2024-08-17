@@ -1,6 +1,8 @@
-﻿using CoinMarketCap.Application.Common;
+﻿using System.Diagnostics;
+using CoinMarketCap.Application.Common;
 using CoinMarketCap.Application.Services.Singleton.Interfaces;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace CoinMarketCap.Application.ViewModels;
 
