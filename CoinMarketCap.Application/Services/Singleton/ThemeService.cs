@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
 
-namespace CoinMarketCap.Application.Themes;
+namespace CoinMarketCap.Application.Services.Singleton;
 
 [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = false)]
 public class ResourceUriPathAttribute(string path) : Attribute
@@ -12,10 +12,10 @@ public class ResourceUriPathAttribute(string path) : Attribute
 [Serializable]
 public class ChangeThemeException(string message, Exception inner) : Exception(message, inner);
 
-public class ThemeManager<T>(Collection<ResourceDictionary> mergedDictionaries)
+public class ThemeService<T>(Collection<ResourceDictionary> mergedDictionaries)
     where T : struct, Enum
 {
-    public ThemeManager() : this(System.Windows.Application.Current.Resources.MergedDictionaries)
+    public ThemeService() : this(System.Windows.Application.Current.Resources.MergedDictionaries)
     {
     }
 

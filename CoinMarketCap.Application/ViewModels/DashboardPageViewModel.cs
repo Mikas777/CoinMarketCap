@@ -8,8 +8,10 @@ using DynamicData.Binding;
 using CommunityToolkit.Mvvm.ComponentModel;
 using DynamicData;
 using ReactiveUI;
-using CoinMarketCap.Application.Themes;
 using CoinMarketCap.Application.Common.Enums;
+using CoinMarketCap.Application.Services.Singleton;
+using System.Windows.Media.Imaging;
+using CoinMarketCap.Application.Services.Transient.Interfaces;
 
 namespace CoinMarketCap.Application.ViewModels;
 
@@ -17,7 +19,8 @@ public partial class DashboardPageViewModel : PageViewModelBase
 {
     private readonly INavigationService _navigationService;
     private readonly ReadOnlyObservableCollection<Cryptocurrency> _cryptocurrencies;
-    private readonly ThemeManager<ApplicationTheme> _themeManager;
+    private readonly ThemeService<ApplicationTheme> _themeService;
+    private readonly IPlotService _plotService;
 
     [ObservableProperty]
     private string? _searchText;
@@ -30,12 +33,15 @@ public partial class DashboardPageViewModel : PageViewModelBase
 
     public ReadOnlyObservableCollection<Cryptocurrency> Cryptocurrencies => _cryptocurrencies;
 
-    public DashboardPageViewModel(RuntimeDataStorage runtimeDataStorage, INavigationService navigationService)
+    public DashboardPageViewModel(RuntimeDataStorage runtimeDataStorage, LanguageService languageService, INavigationService navigationService, IPlotService plotService)
     {
-        _navigationService = navigationService;
+        languageService.ChangeLanguage("uk-UA");
 
-        _themeManager = new ThemeManager<ApplicationTheme>();
-        _themeManager.ChangeTheme(ApplicationTheme.Light);
+        _navigationService = navigationService;
+        _plotService = plotService;
+
+        _themeService = new ThemeService<ApplicationTheme>();
+        _themeService.ChangeTheme(ApplicationTheme.Light);
 
         var filter = this.WhenAnyValue(vm => vm.SearchText)
         .Throttle(TimeSpan.FromMilliseconds(300))
@@ -55,22 +61,22 @@ public partial class DashboardPageViewModel : PageViewModelBase
     [RelayCommand]
     private void ToggleTheme()
     {
-        var currentTheme = _themeManager.GetActualTheme();
+        var currentTheme = _themeService.GetActualTheme();
 
-        if (currentTheme == ApplicationTheme.Light)
-        {
-            _themeManager.ChangeTheme(ApplicationTheme.Dark);
-        }
-        else
-        {
-            _themeManager.ChangeTheme(ApplicationTheme.Light);
-        }
+        _themeService.ChangeTheme(currentTheme == ApplicationTheme.Light
+            ? ApplicationTheme.Dark
+            : ApplicationTheme.Light);
     }
 
     [RelayCommand]
-    private void OpenCryptocurrencyDetail(Cryptocurrency cryptocurrency)
+    private async Task OpenCryptocurrencyDetail(Cryptocurrency cryptocurrency)
     {
-        var detailViewModel = new CryptocurrencyDetailViewModel(cryptocurrency, _navigationService);
+        var imageUrl = $"https://assets.coincap.io/assets/icons/{cryptocurrency.Symbol.ToLower()}@2x.png";
+        var cryptocurrencyImage = new BitmapImage(new Uri(imageUrl));
+        var pointsPlot = await _plotService.GeneratePlotAsync(cryptocurrency.Name, cryptocurrency.Id).ConfigureAwait(false);
+
+        var detailViewModel = new CryptocurrencyDetailViewModel(cryptocurrency, _navigationService, cryptocurrencyImage, pointsPlot);
+
         _navigationService.NavigateTo(detailViewModel);
     }
 

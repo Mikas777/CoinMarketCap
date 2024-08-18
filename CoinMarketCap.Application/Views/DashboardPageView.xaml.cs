@@ -1,7 +1,4 @@
-﻿using CoinMarketCap.Application.Models;
-using CoinMarketCap.Application.ViewModels;
-using System.Windows.Controls;
-using System.Windows.Input;
+﻿using System.Windows.Controls;
 
 namespace CoinMarketCap.Application.Views;
 

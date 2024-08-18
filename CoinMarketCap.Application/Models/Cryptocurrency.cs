@@ -22,11 +22,12 @@ public partial class Cryptocurrency(CryptocurrencyDTO cryptocurrencyDTO) : PageV
     private decimal? _changePercent24Hr = cryptocurrencyDTO.ChangePercent24Hr;
     [ObservableProperty]
     private decimal? _vwap24Hr = cryptocurrencyDTO.Vwap24Hr;
-
     [ObservableProperty]
     private string _priceChangeDirection;
     private decimal _previousPriceUsd;
     
+    public string CryptocurrencyDetailUrl => $"https://coincap.io/assets/{Id}/";
+
     public string Id { get; } = cryptocurrencyDTO.Id;
     public string Symbol { get; } = cryptocurrencyDTO.Symbol;
     public string Name { get; } = cryptocurrencyDTO.Name;

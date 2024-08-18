@@ -1,5 +1,4 @@
 ﻿using CoinMarketCap.Application.Services.Singleton;
-using CoinMarketCap.Application.Themes;
 
 namespace CoinMarketCap.Application.Common.Enums;
 

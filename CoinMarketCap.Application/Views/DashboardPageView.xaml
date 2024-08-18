@@ -100,34 +100,34 @@
             <DataGrid.Columns>
                 <DataGridTextColumn
                     Binding="{Binding Rank}"
-                    Header="Rank"
+                    Header="{DynamicResource Rank}"
                     SortMemberPath="Rank" />
                 <DataGridTextColumn
                     Binding="{Binding Name}"
-                    Header="Name"
+                    Header="{DynamicResource Name}"
                     SortMemberPath="Name" />
                 <DataGridTextColumn
                     Binding="{Binding PriceUsd, Converter={StaticResource TruncateDecimalConverter}}"
-                    Header="Price"
+                    Header="{DynamicResource Price}"
                     SortMemberPath="PriceUsd" />
                 <DataGridTextColumn
                     Binding="{Binding MarketCapUsd, StringFormat={}{0:C2}}"
-                    Header="Market Cap"
+                    Header="{DynamicResource MarketCap}"
                     SortMemberPath="MarketCapUsd" />
                 <DataGridTextColumn
                     Binding="{Binding Vwap24Hr, Converter={StaticResource TruncateDecimalConverter}}"
-                    Header="VWAP (24Hr)"
+                    Header="{DynamicResource VWAP}"
                     SortMemberPath="Vwap24Hr" />
                 <DataGridTextColumn
                     Binding="{Binding Supply, StringFormat={}{0:C2}}"
-                    Header="Supply"
+                    Header="{DynamicResource Supply}"
                     SortMemberPath="Supply" />
                 <DataGridTextColumn
                     Binding="{Binding VolumeUsd24Hr, StringFormat={}{0:C2}}"
-                    Header="Volume (24Hr)"
+                    Header="{DynamicResource Volume}"
                     SortMemberPath="VolumeUsd24Hr" />
 
-                <DataGridTemplateColumn Header="Change (24Hr)" SortMemberPath="ChangePercent24Hr">
+                <DataGridTemplateColumn Header="{DynamicResource Change}" SortMemberPath="ChangePercent24Hr">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock Foreground="{Binding ChangePercent24Hr, Converter={StaticResource ChangePercentToBrushConverter}}" Text="{Binding ChangePercent24Hr, StringFormat={}{0:F2}%}" />

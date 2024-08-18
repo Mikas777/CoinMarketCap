@@ -1,5 +1,4 @@
 ﻿using CoinMarketCap.Application.Common;
-using CoinMarketCap.Application.Models;
 using CoinMarketCap.Application.Services.Singleton.Interfaces;
 using CoinMarketCap.Application.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
