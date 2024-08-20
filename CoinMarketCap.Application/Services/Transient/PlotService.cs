@@ -23,7 +23,7 @@ public class PlotService(ICoinCapClient coinCapClient) :IPlotService
         pointsPlot.Add.Scatter(xs, priceData);
         pointsPlot.Axes.DateTimeTicksBottom();
         pointsPlot.Font.Set("Calibri");
-        pointsPlot.Title($"Історія вартості {name} (24 год.)");
+        pointsPlot.Title($"Історія вартості {name} (1 рік.)");
 
         return pointsPlot;
     }
