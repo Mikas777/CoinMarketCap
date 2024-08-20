@@ -19,7 +19,7 @@ public partial class CryptocurrencyPageView : UserControl
     {
         var viewModel = (CryptocurrencyDetailViewModel)DataContext;
         var pointsPlot = viewModel.PointsPlot;
-
+        
         WpfPlotPoints.Reset(pointsPlot);
         WpfPlotPoints.Refresh();
     }

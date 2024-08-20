@@ -2,14 +2,26 @@
     x:Class="CoinMarketCap.Application.Views.DashboardPageView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:converters="clr-namespace:CoinMarketCap.Application.Themes.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:CoinMarketCap.Application.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="DashboardPageView"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
+
+    <Page.Resources>
+        <Style x:Key="RightAlignCellStyle" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="5,5,5,5" />
+        </Style>
+
+        <Style x:Key="LeftAlignCellStyle" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="5,5,5,5" />
+        </Style>
+    </Page.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -36,6 +48,7 @@
                     x:Name="SearchTextBox"
                     Padding="10"
                     VerticalAlignment="Center"
+                    FontSize="16"
                     Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
                 <Button
                     Grid.Column="1"
@@ -51,8 +64,10 @@
 
         <DataGrid
             Grid.Row="1"
+            AlternatingRowBackground="{DynamicResource DataGridLinesBorderBrush}"
             AutoGenerateColumns="False"
             CanUserSortColumns="True"
+            HorizontalScrollBarVisibility="Auto"
             IsReadOnly="True"
             ItemsSource="{Binding Cryptocurrencies}">
 
@@ -66,6 +81,11 @@
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow">
                     <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="FontSize" Value="14" />
+                    <Setter Property="Margin" Value="0,5,0,5" />
+                    <Setter Property="BorderThickness" Value="1" />
+                    <Setter Property="BorderBrush" Value="Gray" />
+
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding PriceChangeDirection}" Value="Increased">
                             <DataTrigger.EnterActions>
@@ -73,7 +93,7 @@
                                     <Storyboard>
                                         <ColorAnimation
                                             AutoReverse="True"
-                                            Storyboard.TargetProperty="(DataGridRow.Background).(SolidColorBrush.Color)"
+                                            Storyboard.TargetProperty="BorderBrush.Color"
                                             To="LightGreen"
                                             Duration="0:0:1" />
                                     </Storyboard>
@@ -86,7 +106,7 @@
                                     <Storyboard>
                                         <ColorAnimation
                                             AutoReverse="True"
-                                            Storyboard.TargetProperty="(DataGridRow.Background).(SolidColorBrush.Color)"
+                                            Storyboard.TargetProperty="BorderBrush.Color"
                                             To="LightCoral"
                                             Duration="0:0:1" />
                                     </Storyboard>
@@ -99,43 +119,70 @@
 
             <DataGrid.Columns>
                 <DataGridTextColumn
+                    Width="Auto"
                     Binding="{Binding Rank}"
+                    ElementStyle="{StaticResource RightAlignCellStyle}"
+                    FontSize="14"
                     Header="{DynamicResource Rank}"
                     SortMemberPath="Rank" />
                 <DataGridTextColumn
+                    Width="Auto"
                     Binding="{Binding Name}"
+                    ElementStyle="{StaticResource LeftAlignCellStyle}"
+                    FontSize="14"
                     Header="{DynamicResource Name}"
                     SortMemberPath="Name" />
                 <DataGridTextColumn
+                    Width="Auto"
                     Binding="{Binding PriceUsd, Converter={StaticResource TruncateDecimalConverter}}"
+                    ElementStyle="{StaticResource RightAlignCellStyle}"
+                    FontSize="14"
                     Header="{DynamicResource Price}"
                     SortMemberPath="PriceUsd" />
                 <DataGridTextColumn
+                    Width="Auto"
                     Binding="{Binding MarketCapUsd, StringFormat={}{0:C2}}"
+                    ElementStyle="{StaticResource RightAlignCellStyle}"
+                    FontSize="14"
                     Header="{DynamicResource MarketCap}"
                     SortMemberPath="MarketCapUsd" />
                 <DataGridTextColumn
+                    Width="Auto"
                     Binding="{Binding Vwap24Hr, Converter={StaticResource TruncateDecimalConverter}}"
+                    ElementStyle="{StaticResource RightAlignCellStyle}"
+                    FontSize="14"
                     Header="{DynamicResource VWAP}"
                     SortMemberPath="Vwap24Hr" />
                 <DataGridTextColumn
+                    Width="Auto"
                     Binding="{Binding Supply, StringFormat={}{0:C2}}"
+                    ElementStyle="{StaticResource RightAlignCellStyle}"
+                    FontSize="14"
                     Header="{DynamicResource Supply}"
                     SortMemberPath="Supply" />
                 <DataGridTextColumn
+                    Width="Auto"
                     Binding="{Binding VolumeUsd24Hr, StringFormat={}{0:C2}}"
+                    ElementStyle="{StaticResource RightAlignCellStyle}"
+                    FontSize="14"
                     Header="{DynamicResource Volume}"
                     SortMemberPath="VolumeUsd24Hr" />
 
-                <DataGridTemplateColumn Header="{DynamicResource Change}" SortMemberPath="ChangePercent24Hr">
+                <DataGridTemplateColumn
+                    Width="Auto"
+                    Header="{DynamicResource Change}"
+                    SortMemberPath="ChangePercent24Hr">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Foreground="{Binding ChangePercent24Hr, Converter={StaticResource ChangePercentToBrushConverter}}" Text="{Binding ChangePercent24Hr, StringFormat={}{0:F2}%}" />
+                            <TextBlock
+                                FontSize="14"
+                                Foreground="{Binding ChangePercent24Hr, Converter={StaticResource ChangePercentToBrushConverter}}"
+                                Style="{StaticResource RightAlignCellStyle}"
+                                Text="{Binding ChangePercent24Hr, StringFormat={}{0:F2}%}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-
     </Grid>
 </Page>

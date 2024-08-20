@@ -6,5 +6,5 @@ namespace CoinMarketCap.Application.Clients.Interfaces;
 public interface ICoinCapClient
 {
     Task<List<CryptocurrencyDTO>?> GetCryptocurrencies();
-    Task<List<CryptocurrencyPriceData>?> GetCryptocurrencyPriceHistory(string assetId, string interval = "m1");
+    Task<List<CryptocurrencyPriceDateHistoryDTO>?> GetCryptocurrencyPriceHistory(string assetId, string interval = "d1");
 }

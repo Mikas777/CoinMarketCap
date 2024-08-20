@@ -74,46 +74,68 @@
 
             <StackPanel Grid.Column="0" Margin="10">
                 <TextBlock
+                    FontFamily="{StaticResource DefaultFontFamily}"
                     FontSize="16"
                     FontWeight="Bold"
                     Text="{DynamicResource CurrentPrice}" />
-                <TextBlock FontSize="16" Text="{Binding Cryptocurrency.PriceUsd, Converter={StaticResource TruncateDecimalConverter}}" />
+                <TextBlock
+                    FontFamily="{StaticResource DefaultFontFamily}"
+                    FontSize="16"
+                    Text="{Binding Cryptocurrency.PriceUsd, Converter={StaticResource TruncateDecimalConverter}}" />
 
                 <TextBlock
                     Margin="0,10,0,0"
+                    FontFamily="{StaticResource DefaultFontFamily}"
                     FontSize="16"
                     FontWeight="Bold"
                     Text="{DynamicResource MarketCap}" />
-                <TextBlock FontSize="16" Text="{Binding Cryptocurrency.MarketCapUsd, StringFormat={}{0:C}}" />
+                <TextBlock
+                    FontFamily="{StaticResource DefaultFontFamily}"
+                    FontSize="16"
+                    Text="{Binding Cryptocurrency.MarketCapUsd, StringFormat={}{0:C}}" />
 
                 <TextBlock
                     Margin="0,10,0,0"
+                    FontFamily="{StaticResource DefaultFontFamily}"
                     FontSize="16"
                     FontWeight="Bold"
                     Text="{DynamicResource Volume24Hr}" />
-                <TextBlock FontSize="16" Text="{Binding Cryptocurrency.VolumeUsd24Hr, StringFormat={}{0:C}}" />
+                <TextBlock
+                    FontFamily="{StaticResource DefaultFontFamily}"
+                    FontSize="16"
+                    Text="{Binding Cryptocurrency.VolumeUsd24Hr, StringFormat={}{0:C}}" />
             </StackPanel>
 
             <StackPanel Grid.Column="1" Margin="10">
                 <TextBlock
+                    FontFamily="{StaticResource DefaultFontFamily}"
                     FontSize="16"
                     FontWeight="Bold"
                     Text="{DynamicResource Supply}" />
-                <TextBlock FontSize="16" Text="{Binding Cryptocurrency.Supply, StringFormat={}{0:C}}" />
+                <TextBlock
+                    FontFamily="{StaticResource DefaultFontFamily}"
+                    FontSize="16"
+                    Text="{Binding Cryptocurrency.Supply, StringFormat={}{0:C}}" />
 
                 <TextBlock
                     Margin="0,10,0,0"
+                    FontFamily="{StaticResource DefaultFontFamily}"
                     FontSize="16"
                     FontWeight="Bold"
                     Text="{DynamicResource VWAP24Hr}" />
-                <TextBlock FontSize="16" Text="{Binding Cryptocurrency.Vwap24Hr, Converter={StaticResource TruncateDecimalConverter}}" />
+                <TextBlock
+                    FontFamily="{StaticResource DefaultFontFamily}"
+                    FontSize="16"
+                    Text="{Binding Cryptocurrency.Vwap24Hr, Converter={StaticResource TruncateDecimalConverter}}" />
 
                 <TextBlock
                     Margin="0,10,0,0"
+                    FontFamily="{StaticResource DefaultFontFamily}"
                     FontSize="16"
                     FontWeight="Bold"
                     Text="{DynamicResource Change24Hr}" />
                 <TextBlock
+                    FontFamily="{StaticResource DefaultFontFamily}"
                     FontSize="16"
                     Foreground="{Binding Cryptocurrency.ChangePercent24Hr, Converter={StaticResource ChangePercentToBrushConverter}}"
                     Text="{Binding Cryptocurrency.ChangePercent24Hr, StringFormat={}{0:F2}%}" />

@@ -4,5 +4,5 @@ namespace CoinMarketCap.Application.DTOs;
 
 public class CryptocurrencyPriceHistoryResponseDTO
 {
-    public List<CryptocurrencyPriceData> Data { get; set; }
+    public List<CryptocurrencyPriceDateHistoryDTO> Data { get; set; }
 }

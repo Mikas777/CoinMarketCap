@@ -4,15 +4,23 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:common="clr-namespace:CoinMarketCap.Application.Common"
     xmlns:converters="clr-namespace:CoinMarketCap.Application.Themes.Converters"
-    xmlns:primitives="clr-namespace:System.Windows.Controls.Ribbon.Primitives;assembly=System.Windows.Controls.Ribbon">
+    xmlns:viewModels="clr-namespace:CoinMarketCap.Application.ViewModels"
+    xmlns:views="clr-namespace:CoinMarketCap.Application.Views">
 
     <Application.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/Themes/LightTheme.xaml" />
-            </ResourceDictionary.MergedDictionaries>
             <common:ChangePercentToBrushConverter x:Key="ChangePercentToBrushConverter" />
             <converters:TruncateDecimalConverter x:Key="TruncateDecimalConverter" />
+
+            <FontFamily x:Key="DefaultFontFamily">pack://application:,,,/Resources/Fonts/#Montserrat</FontFamily>
+
+            <DataTemplate DataType="{x:Type viewModels:DashboardPageViewModel}">
+                <views:DashboardPageView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModels:CryptocurrencyDetailViewModel}">
+                <views:CryptocurrencyPageView />
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

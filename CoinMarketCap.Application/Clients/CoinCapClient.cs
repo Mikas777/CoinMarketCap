@@ -47,7 +47,7 @@ public class CoinCapClient(HttpClient httpClient, ILogger<CoinCapClient> logger)
         }
     }
 
-    public async Task<List<CryptocurrencyPriceData>?> GetCryptocurrencyPriceHistory(string assetId, string interval = "d1")
+    public async Task<List<CryptocurrencyPriceDateHistoryDTO>?> GetCryptocurrencyPriceHistory(string assetId, string interval = "d1")
     {
         string url = $"assets/{assetId}/history?interval={interval}";
         

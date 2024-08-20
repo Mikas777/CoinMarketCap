@@ -4,28 +4,15 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewModels="clr-namespace:CoinMarketCap.Application.ViewModels"
-    xmlns:views="clr-namespace:CoinMarketCap.Application.Views"
     Title="CoinMarketCap"
-    Width="970"
+    Width="1070"
     Height="800"
-    MinWidth="970"
+    MinWidth="1070"
     MinHeight="450"
     Background="{DynamicResource WindowBackground}"
     Content="{Binding Content}"
     Foreground="{DynamicResource WindowForeground}"
+    Icon="Resources/Cryptocurrency_Logo.png"
     ShowActivated="True"
     WindowStartupLocation="CenterScreen"
-    mc:Ignorable="d">
-
-    <Window.Resources>
-        <DataTemplate DataType="{x:Type viewModels:DashboardPageViewModel}">
-            <views:DashboardPageView />
-        </DataTemplate>
-
-        <DataTemplate DataType="{x:Type viewModels:CryptocurrencyDetailViewModel}">
-            <views:CryptocurrencyPageView />
-        </DataTemplate>
-    </Window.Resources>
-
-</Window>
+    mc:Ignorable="d" />

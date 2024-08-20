@@ -1,6 +1,6 @@
 ﻿namespace CoinMarketCap.Domain.Models;
 
-public class CryptocurrencyPriceData
+public class CryptocurrencyPriceDateHistoryDTO
 {
     public decimal PriceUsd { get; set; }
 

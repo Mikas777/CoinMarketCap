@@ -71,8 +71,14 @@ public partial class DashboardPageViewModel : PageViewModelBase
     [RelayCommand]
     private async Task OpenCryptocurrencyDetail(Cryptocurrency cryptocurrency)
     {
+        if (cryptocurrency is null)
+        {
+            return;
+        }
+
         var imageUrl = $"https://assets.coincap.io/assets/icons/{cryptocurrency.Symbol.ToLower()}@2x.png";
         var cryptocurrencyImage = new BitmapImage(new Uri(imageUrl));
+
         var pointsPlot = await _plotService.GeneratePlotAsync(cryptocurrency.Name, cryptocurrency.Id).ConfigureAwait(false);
 
         var detailViewModel = new CryptocurrencyDetailViewModel(cryptocurrency, _navigationService, cryptocurrencyImage, pointsPlot);

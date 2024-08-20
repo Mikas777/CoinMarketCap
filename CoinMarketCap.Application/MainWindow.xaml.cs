@@ -1,11 +1,9 @@
-﻿using System.Windows;
-
-namespace CoinMarketCap.Application
+﻿namespace CoinMarketCap.Application
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         public MainWindow()
         {

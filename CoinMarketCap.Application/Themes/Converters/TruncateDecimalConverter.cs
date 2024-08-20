@@ -9,9 +9,18 @@ public class TruncateDecimalConverter : IValueConverter
     {
         if (value is decimal decimalValue)
         {
-            // Обрезаем значение до 6 знаков после запятой
-            decimal truncatedValue = Math.Truncate(decimalValue * 1000000) / 1000000;
-            return $"${truncatedValue:F6}";
+            var truncatedValue = Math.Truncate(decimalValue * 1000000) / 1000000;
+
+            return truncatedValue switch
+            {
+                <= (decimal)0.01 => $"${truncatedValue:F6}",
+                <= (decimal)0.1 => $"${truncatedValue:F5}",
+                <= 1 => $"${truncatedValue:F4}",
+                <= 10 => $"${truncatedValue:F3}",
+                <= 100 => $"${truncatedValue:F2}",
+                <= 1000 => $"${truncatedValue:F1}",
+                _ => $"${truncatedValue:F2}"
+            };
         }
         return value;
     }

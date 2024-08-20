@@ -9,6 +9,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Fonts\Montserrat-Bold.ttf" />
+    <None Remove="Resources\Fonts\Montserrat-Italic.ttf" />
+    <None Remove="Resources\Fonts\Montserrat-Light.ttf" />
+    <None Remove="Resources\Fonts\Montserrat-Regular.ttf" />
+    <None Remove="Resources\Cryptocurrency_Logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
@@ -25,11 +33,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Mappers\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\CoinMarketCap.Domain\CoinMarketCap.Domain.csproj" />
+    <Resource Include="Resources\Fonts\Montserrat-Bold.ttf" />
+    <Resource Include="Resources\Fonts\Montserrat-Italic.ttf" />
+    <Resource Include="Resources\Fonts\Montserrat-Light.ttf" />
+    <Resource Include="Resources\Fonts\Montserrat-Regular.ttf" />
+    <Resource Include="Resources\Cryptocurrency_Logo.png" />
   </ItemGroup>
 
 </Project>

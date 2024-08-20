@@ -4,17 +4,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.9.34902.65
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoinMarketCap.Application", "CoinMarketCap.Application\CoinMarketCap.Application.csproj", "{70FC0B8E-89DC-4071-B017-6435D32952D3}"
-	ProjectSection(ProjectDependencies) = postProject
-		{2E707472-8C15-4FEF-AC18-34B474BC4FE1} = {2E707472-8C15-4FEF-AC18-34B474BC4FE1}
-		{EAEB7638-EA28-4A36-9551-3C1B09ED394E} = {EAEB7638-EA28-4A36-9551-3C1B09ED394E}
-	EndProjectSection
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoinMarketCap.Domain", "CoinMarketCap.Domain\CoinMarketCap.Domain.csproj", "{2E707472-8C15-4FEF-AC18-34B474BC4FE1}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoinMarketCap.Infrastructure", "CoinMarketCap.Infrastructure\CoinMarketCap.Infrastructure.csproj", "{EAEB7638-EA28-4A36-9551-3C1B09ED394E}"
-	ProjectSection(ProjectDependencies) = postProject
-		{2E707472-8C15-4FEF-AC18-34B474BC4FE1} = {2E707472-8C15-4FEF-AC18-34B474BC4FE1}
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,14 +15,6 @@ Global
 		{70FC0B8E-89DC-4071-B017-6435D32952D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70FC0B8E-89DC-4071-B017-6435D32952D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70FC0B8E-89DC-4071-B017-6435D32952D3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2E707472-8C15-4FEF-AC18-34B474BC4FE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2E707472-8C15-4FEF-AC18-34B474BC4FE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2E707472-8C15-4FEF-AC18-34B474BC4FE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2E707472-8C15-4FEF-AC18-34B474BC4FE1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EAEB7638-EA28-4A36-9551-3C1B09ED394E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EAEB7638-EA28-4A36-9551-3C1B09ED394E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EAEB7638-EA28-4A36-9551-3C1B09ED394E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EAEB7638-EA28-4A36-9551-3C1B09ED394E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

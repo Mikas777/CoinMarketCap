@@ -1,39 +1,40 @@
 ﻿using Microsoft.Extensions.Hosting;
 using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
+using CoinMarketCap.Application.ViewModels;
 using CoinMarketCap.Application.Extensions;
 using CoinMarketCap.Application.Services.Transient.Interfaces;
-using CoinMarketCap.Application.ViewModels;
 
-namespace CoinMarketCap.Application;
-
-public partial class App
+namespace CoinMarketCap.Application
 {
-    private readonly IHost _host = ServicesConfigurator.CreateHost();
-
-    protected override async void OnStartup(StartupEventArgs e)
+    public partial class App
     {
-        base.OnStartup(e);
+        private readonly IHost _host = ServicesConfigurator.CreateHost();
 
-        await _host.StartAsync().ConfigureAwait(false);
-
-        var serviceProvider = _host.Services.CreateScope().ServiceProvider;
-        var mainWindowViewModel = serviceProvider.GetRequiredService<MainWindowViewModel>();
-
-        var mainWindow = new MainWindow
+        protected override async void OnStartup(StartupEventArgs e)
         {
-            DataContext = mainWindowViewModel
-        };
+            base.OnStartup(e);
 
-        mainWindow.Show();
+            await _host.StartAsync().ConfigureAwait(false);
 
-        await _host.Services.GetRequiredService<IStartupService>().Start().ConfigureAwait(false);
-    }
+            var serviceProvider = _host.Services.CreateScope().ServiceProvider;
+            var mainWindowViewModel = serviceProvider.GetRequiredService<MainWindowViewModel>();
 
-    protected override async void OnExit(ExitEventArgs e)
-    {
-        await _host.StopAsync().ConfigureAwait(false);
-        _host.Dispose();
-        base.OnExit(e);
+            var mainWindow = new MainWindow
+            {
+                DataContext = mainWindowViewModel
+            };
+
+            mainWindow.Show();
+
+            await _host.Services.GetRequiredService<IStartupService>().Start().ConfigureAwait(false);
+        }
+
+        protected override async void OnExit(ExitEventArgs e)
+        {
+            await _host.StopAsync().ConfigureAwait(false);
+            _host.Dispose();
+            base.OnExit(e);
+        }
     }
 }

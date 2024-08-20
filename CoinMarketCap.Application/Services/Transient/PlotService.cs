@@ -18,13 +18,14 @@ public class PlotService(ICoinCapClient coinCapClient) :IPlotService
         var priceData = cryptocurrencyPriceHistory.Select(p => Convert.ToDouble(p.PriceUsd)).ToArray();
         var dateTimes = cryptocurrencyPriceHistory.Select(p => UnixTimeToDateTime(p.Time)).ToArray();
         var xs = dateTimes.ToArray();
-        var plotModel = new Plot();
+        var pointsPlot = new Plot();
+        
+        pointsPlot.Add.Scatter(xs, priceData);
+        pointsPlot.Axes.DateTimeTicksBottom();
+        pointsPlot.Font.Set("Calibri");
+        pointsPlot.Title($"Історія вартості {name} (24 год.)");
 
-        plotModel.Add.Scatter(xs, priceData);
-        plotModel.Axes.DateTimeTicksBottom();
-        plotModel.Title($"Історія вартості {name} (24 год.)");
-
-        return plotModel;
+        return pointsPlot;
     }
 
     private DateTime UnixTimeToDateTime(long unixTime)
